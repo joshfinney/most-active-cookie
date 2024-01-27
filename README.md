@@ -45,7 +45,7 @@ Install dependencies:
 $ pip install -r requirements.txt
 ```
 
-## Usage
+## Usage
 
 Run the Most Active Cookie Analyzer with the following command at the project root:
 
