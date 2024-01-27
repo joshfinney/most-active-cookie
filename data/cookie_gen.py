@@ -37,4 +37,4 @@ def create_cookie_log(filename, start_date, num_days=30, cookies_per_day=5):
 end_date = datetime.datetime.now()
 start_date = end_date - datetime.timedelta(days=30)
 
-create_cookie_log('cookie_log_1.csv', start_date)
+create_cookie_log('cookie_log.csv', start_date)

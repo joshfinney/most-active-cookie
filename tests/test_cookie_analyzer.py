@@ -1,4 +1,5 @@
 from datetime import datetime
+import logging
 import pytest
 from src.cookie_analyzer import CookieAnalytics
 from main import parse_arguments
@@ -105,5 +106,24 @@ def test_analyze_invalid_format(capsys):
     analytics = CookieAnalytics(str(DATA_DIR / 'invalid_format_test.csv'), VALID_DATE)
     analytics.analyze()
     captured = capsys.readouterr()
-    print(captured)
-    # You may want to assert specific log output here, depending on how you handle format errors
+    assert 'Invalid date format in row' in captured.err
+
+def test_large_log_file(capsys):
+    """
+    Test handling of a large log file.
+    """
+    VALID_DATE = '2024-01-04' # Different as had to generate a large file with cookie_gen.py
+    analytics = CookieAnalytics(str(DATA_DIR / 'large_file_test.csv'), VALID_DATE)
+    analytics.analyze()
+    captured = capsys.readouterr()
+    assert len(captured.out.split('\n')) > 1
+
+
+def test_boundary_date_condition(capsys):
+    """
+    Test handling of cookies at the boundary of the target date.
+    """
+    analytics = CookieAnalytics(str(DATA_DIR / 'boundary_date_test.csv'), VALID_DATE)
+    analytics.analyze()
+    captured = capsys.readouterr()
+    assert 'cookieCorrect' in captured.out
