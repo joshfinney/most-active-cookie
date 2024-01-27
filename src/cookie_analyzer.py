@@ -7,7 +7,7 @@ import sys
 from typing import List, Optional
 import csv
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class CookieAnalytics:
     def __init__(self, file_path: str, date_str: str):
